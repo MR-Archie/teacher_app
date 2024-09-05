@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -8,6 +9,8 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
+
+final databaseRef = FirebaseDatabase.instance.ref();
 
 class _HomePageState extends State<HomePage> {
   @override
@@ -38,7 +41,13 @@ class _HomePageState extends State<HomePage> {
               height: 15,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                databaseRef.child("student").set({
+                  'email': "hello@gmail.com",
+                  'lat': '1234',
+                  'lon': '5678',
+                });
+              },
               style: ButtonStyle(
                 backgroundColor: WidgetStateProperty.all(Colors.blueAccent),
               ),
